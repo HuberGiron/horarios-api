@@ -1,0 +1,16 @@
+[Unit]
+Description=API de horarios MANRESA IBERO
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+DynamicUser=yes
+WorkingDirectory=/opt/ibero-horarios
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/opt/ibero-horarios/.venv/bin/python -m uvicorn main:app --host 127.0.0.1 --port 8872
+Restart=on-failure
+RestartSec=3s
+
+[Install]
+WantedBy=multi-user.target
